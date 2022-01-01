@@ -14,6 +14,30 @@ window:
   dimensions:
     columns: 140
     lines: 38
+
+font:
+  normal:
+    family: Operator Mono 
+    style: Light
+  bold:
+    family: Operator Mono 
+    style: Book
+  italic:
+    family: Operator Mono 
+    style: Light Italic
+  bold_italic:
+    family: Operator Mono 
+    style: Book Italic
+  size: 14.0
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    x: 0
+    y: 0
+  use_thin_strokes: true
+
+
 colors:
   primary:
     background: "0x2c2e34"
