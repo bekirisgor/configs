@@ -15,6 +15,8 @@ window:
     columns: 140
     lines: 38
 
+shell:
+  program: /opt/homebrew/bin/fish
 font:
   normal:
     family: OperatorMono Nerd Font
@@ -48,7 +50,7 @@ colors:
     red: "0xfc5d7c"
     green: "0x9ed072"
     yellow: "0xe7c664"
-    blue: "0x76cce0"
+    lue: "0x76cce0"
     magenta: "0xb39df3"
     cyan: "0xf39660"
     white: "0xe2e2e3"
