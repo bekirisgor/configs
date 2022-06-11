@@ -1,3 +1,4 @@
+export PATH="$HOME/.cargo/bin:$PATH"
 
 abbr -a c cargo
 abbr -a e nvim
