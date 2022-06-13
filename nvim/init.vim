@@ -2,6 +2,7 @@ set shell=/bin/bash
 let mapleader = "\<Space>"
 
 
+
 "=============================================================================
 "PLUGINS"
 "=============================================================================
@@ -17,12 +18,12 @@ Plug 'ciaranm/securemodelines'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'justinmk/vim-sneak'
 Plug 'scrooloose/nerdcommenter'
-
+Plug 'nvim-lua/plenary.nvim'
 " Color Schemes
 Plug 'chriskempson/base16-vim'
 Plug 'sainnhe/sonokai'
-
-
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
  " Gui enhancement
  Plug 'itchyny/lightline.vim'
  Plug 'ryanoasis/vim-devicons'
@@ -38,6 +39,7 @@ Plug 'sainnhe/sonokai'
 " Semantic language support
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help', {'branch': 'main'}
 Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
 Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
 Plug 'hrsh7th/cmp-path', {'branch': 'main'}
@@ -58,12 +60,15 @@ Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
 Plug 'tpope/vim-fugitive'
 
 " folder structure tree
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
+
 
 call plug#end()
 
@@ -86,7 +91,7 @@ endif
  set background=dark
 let base16colorspace=256
 let g:base16_shell_path = "~/.config/base16-shell/scripts/"
-colorscheme sonokai 
+colorscheme gruvbox-material
 syntax on
 hi Normal ctermbg=NONE
 
@@ -137,11 +142,12 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 
 " =============================================================================
 " LSP configuration
-lua << END
+lua << EOF
 local cmp = require'cmp'
 
 local lspconfig = require'lspconfig'
 cmp.setup({
+	
   snippet = {
     -- REQUIRED by nvim-cmp. get rid of it once we can
     expand = function(args)
@@ -154,10 +160,13 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     -- TODO: currently snippets from lsp end up getting prioritized -- stop that!
+		{ name = "nvim_lsp_signature_help" },
     { name = 'nvim_lsp' },
   }, {
     { name = 'path' },
-  }),
+  }
+
+),
   experimental = {
     ghost_text = true,
   },
@@ -171,6 +180,8 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup lspconfig.
+
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -234,8 +245,69 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = true,
   }
 )
-END
+local lspconfig = require("lspconfig")
+local null_ls = require("null-ls")
+local buf_map = function(bufnr, mode, lhs, rhs, opts)
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+        silent = true,
+    })
+end
+local on_attach = function(client, bufnr)
+    vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
+    vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
+    vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
+    vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
+    vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
+    vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
+    vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
+    vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
+    vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
+    vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
+    vim.cmd("command! LspDiagLine lua vim.diagnostic.open_float()")
+    vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
+    buf_map(bufnr, "n", "gd", ":LspDef<CR>")
+    buf_map(bufnr, "n", "gr", ":LspRename<CR>")
+    buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
+    buf_map(bufnr, "n", "K", ":LspHover<CR>")
+    buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>")
+    buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>")
+    buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>")
+    buf_map(bufnr, "i", "<C-a>", "<cmd> LspCodeAction<CR>")
+		buf_map(bufnr, "n", "gl", ":LspFormatting<CR>")
+    buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>")
+    buf_map(bufnr, "i", "<C-x>", "<cmd> LspSignatureHelp<CR>")
+    if client.resolved_capabilities.document_formatting then
+        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    end
+end
 
+lspconfig.tsserver.setup({
+			flags={debounce_text_changes = 150},
+			on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        local ts_utils = require("nvim-lsp-ts-utils")
+        ts_utils.setup({})
+        ts_utils.setup_client(client)
+        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
+        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
+
+        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
+        on_attach(client, bufnr)
+    end,
+})
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.code_actions.eslint,
+        null_ls.builtins.formatting.prettier,
+    },
+		on_attach= on_attach
+
+})
+
+EOF
 
 
 
@@ -308,7 +380,7 @@ let g:lightline = {
       \ },
       \ }
 
-let g:lightline.colorscheme = 'sonokai'
+let g:lightline.colorscheme = 'gruvbox-material'
 
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
@@ -392,9 +464,9 @@ set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Use wide tabs
-set shiftwidth=8
-set softtabstop=8
-set tabstop=8
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set noexpandtab
 
 " Wrapping options
