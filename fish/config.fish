@@ -49,3 +49,8 @@ if status --is-interactive
     source "$BASE16_SHELL/profile_helper.fish"
 end
 
+
+# bun
+set -Ux BUN_INSTALL "/Users/bekirisgor/.bun"
+fish_add_path "/Users/bekirisgor/.bun/bin"
+

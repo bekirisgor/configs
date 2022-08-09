@@ -1,5 +1,5 @@
 set shell=/bin/bash
-let mapleader = "\<Space>"
+let mapleader = " "
 
 
 
@@ -22,7 +22,10 @@ Plug 'nvim-lua/plenary.nvim'
 " Color Schemes
 Plug 'chriskempson/base16-vim'
 Plug 'sainnhe/sonokai'
-Plug 'morhetz/gruvbox'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'rose-pine/neovim',{'as': 'rose-pine'}
+
+"Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
  " Gui enhancement
  Plug 'itchyny/lightline.vim'
@@ -45,6 +48,7 @@ Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
 Plug 'hrsh7th/cmp-path', {'branch': 'main'}
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'Maan2003/lsp_lines.nvim'
 
 " Only because nvim-cmp _requires_ snippets
 Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
@@ -62,7 +66,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-
+Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-fugitive'
 
 " folder structure tree
@@ -87,11 +91,50 @@ if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
   set termguicolors
 endif
 
+let g:catppuccin_flavour = "frappe" " latte, frappe, macchiato, mocha
 
- set background=dark
+lua << EOF
+local colors = require("catppuccin.palettes").get_palette()
+colors.none = "NONE"
+require("catppuccin").setup({
+
+custom_highlights = {
+		DiagnosticVirtualTextError = { bg = colors.none },
+		DiagnosticVirtualTextWarn = { bg = colors.none },
+		DiagnosticVirtualTextInfo = { bg = colors.none },
+		DiagnosticVirtualTextHint = { bg = colors.none },
+
+	},
+color_overrides = {
+	frappe = {
+		lavender = "#fcefcc",
+		teal = "#85d4c9",
+		text = "#d5dce3",
+		mantle = "#242424",
+		crust = "#474747",	}
+}
+})
+EOF
+
+
+let g:gruvbox_material_diagnostic_virtual_text = 'colored'
+let g:gruvbox_material_foreground = 'mix'
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_enable_bold  = 1
+let g:gruvbox_material_transparent_background = 2
+let g:gruvbox_material_spell_foreground = 'colored'
+let g:gruvbox_material_menu_selection_background = 'orange'
+let g:gruvbox_material_ui_contrast = 'low'
+let g:gruvbox_material_diagnostic_text_highlight = 1
 let base16colorspace=256
 let g:base16_shell_path = "~/.config/base16-shell/scripts/"
-colorscheme gruvbox-material
+
+"sonokai color scheme configs
+
+let g:sonokai_style = 'maia'
+let g:sonokai_diagnostic_virtual_text = 'colored'
+
+colorscheme catppuccin
 syntax on
 hi Normal ctermbg=NONE
 
@@ -129,7 +172,7 @@ set diffopt+=indent-heuristic
 set colorcolumn=80 " and give me a colored column
 set showcmd " Show (partial) command in status line.
 set mouse=a " Enable mouse usage (all modes) in terminals
-"set shortmess+=c " don't give |ins-completion-menu| messages.
+set shortmess+=c " don't give |ins-completion-menu| messages.
 
 " Show those damn hidden characters
 " Verbose: set listchars=nbsp:¬,eol:¶,extends:»,precedes:«,trail:•
@@ -141,9 +184,52 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 " =============================================================================
 
 " =============================================================================
+let g:completion_enable_auto_popup = 0
+let g:completion_matching_strategy_list = ['fuzzy']
+let g:completion_enable_auto_signature = 0
+let g:lsp_diagnostics_enabled = 0
+map <silent>  <C-g> <Plug>(completion_trigger)
+let g:completion_enable_auto_hover = 0
+let g:vista_fzf_preview = ['right:50%']
+
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+
+" Executive used when opening vista sidebar without specifying it.
+" See all the avaliable executives via `:echo g:vista#executives`.
+let g:vista_default_executive = 'ctags'
+
+" Set the executive for some filetypes explicitly. Use the explicit executive
+" instead of the default one for these filetypes when using `:Vista` without
+" specifying the executive.
+let g:vista_executive_for = {
+  \ 'cpp': 'vim_lsp',
+  \ 'php': 'vim_lsp',
+  \ }
+
+" Declare the command including the executable and options used to generate ctags output
+" for some certain filetypes.The file path will be appened to your custom command.
+" For example:
+let g:vista_ctags_cmd = {
+      \ 'haskell': 'hasktags -x -o - -c',
+      \ }
+
+" To enable fzf's preview window set g:vista_fzf_preview.
+" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
+" For example:
+let g:vista_fzf_preview = ['right:50%']
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 1
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+
 " LSP configuration
 lua << EOF
 local cmp = require'cmp'
+
 
 local lspconfig = require'lspconfig'
 cmp.setup({
@@ -154,28 +240,62 @@ cmp.setup({
       vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-  mapping = {
-    -- Tab immediately completes. C-n/C-p to select.
-    ['<Tab>'] = cmp.mapping.confirm({ select = true })
-  },
+ mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+ -- mapping = {
+ --   -- Tab immediately completes. C-n/C-p to select.
+ --   ['<Tab>'] = cmp.mapping.confirm({ select = true })
+ -- },
+
+ formatting = {
+	 
+ format = function(entry, vim_item)
+ if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
+    vim_item.menu = entry.completion_item.detail
+  else
+    vim_item.menu = ({
+      nvim_lsp = "[LSP]",
+      luasnip = "[Snippet]",
+      buffer = "[Buffer]",
+      path = "[Path]",
+    })[entry.source.name]
+  end
+  return vim_item
+end
+	 },
+
   sources = cmp.config.sources({
     -- TODO: currently snippets from lsp end up getting prioritized -- stop that!
-		{ name = "nvim_lsp_signature_help" },
-    { name = 'nvim_lsp' },
-  }, {
-    { name = 'path' },
-  }
+			{ name = "nvim_lsp_signature_help" },
+			{ name = 'nvim_lsp' },
+			{ name = 'path' },
+      { name = "treesitter" },
+      { name = "buffer" },
+      { name = "luasnip" },
+			{ name = "nvim_lua" },
+			}),
 
-),
   experimental = {
     ghost_text = true,
   },
+	window ={
+		documentation ={
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
+		}
+	}
 })
 
 -- Enable completing paths in :
 cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
-    { name = 'cmdline'}
+    { name = 'cmdline'},
+		{	name = 'path'}
   })
 })
 
@@ -191,28 +311,41 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
-
+	require("lsp_lines").setup()
+vim.keymap.set(
+  "",
+  "<Leader>l",
+  require("lsp_lines").toggle,
+  { desc = "Toggle lsp_lines" }
+)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+	buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+	buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>c', '<cmd>lua vim.lsp.buf.completion()<CR>', opts)
+  buf_set_keymap('n', '<C-s>', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   -- Get signatures (and _only_ signatures) when in argument lists.
   require "lsp_signature".on_attach({
     doc_lines = 10,
+		max_height = 20,
+		floating_window = false,
+		padding = '  ',
     handler_opts = {
-      border = "none"
+      border = "rounded"
     },
   })
 end
@@ -240,11 +373,14 @@ lspconfig.rust_analyzer.setup {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
+    virtual_text = false,
+    update_in_insert = false,
   }
 )
+
+vim.diagnostic.config({
+  virtual_text = false,
+})
 local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -252,56 +388,31 @@ local buf_map = function(bufnr, mode, lhs, rhs, opts)
         silent = true,
     })
 end
-local on_attach = function(client, bufnr)
-    vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
-    vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
-    vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
-    vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
-    vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
-    vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
-    vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
-    vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
-    vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
-    vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
-    vim.cmd("command! LspDiagLine lua vim.diagnostic.open_float()")
-    vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
-    buf_map(bufnr, "n", "gd", ":LspDef<CR>")
-    buf_map(bufnr, "n", "gr", ":LspRename<CR>")
-    buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
-    buf_map(bufnr, "n", "K", ":LspHover<CR>")
-    buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>")
-    buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>")
-    buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>")
-    buf_map(bufnr, "i", "<C-a>", "<cmd> LspCodeAction<CR>")
-		buf_map(bufnr, "n", "gl", ":LspFormatting<CR>")
-    buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>")
-    buf_map(bufnr, "i", "<C-x>", "<cmd> LspSignatureHelp<CR>")
-    if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-    end
-end
 
 lspconfig.tsserver.setup({
 			flags={debounce_text_changes = 150},
 			on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.resolved_capabilities.docmentFormattingProvider = true
+        client.resolved_capabilities.docmentRangeFormattingProvider = tre
         local ts_utils = require("nvim-lsp-ts-utils")
         ts_utils.setup({})
         ts_utils.setup_client(client)
         buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
         buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
-
         buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
-        on_attach(client, bufnr)
+       on_attach(client, bufnr)
     end,
 })
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.code_actions.eslint,
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.code_actions.eslint_d,
         null_ls.builtins.formatting.prettier,
+				--null_ls.builtins.diagnostics.luacheck,
+				-- null_ls.builtins.formatting.lua_format,
+				-- null_ls.builtins.hover.dictionary
+
     },
 		on_attach= on_attach
 
@@ -315,9 +426,29 @@ EOF
 " Plugin Settigs 
 " =============================================================================
 " Enable type inlay hints
+"
+" Comp color
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+
+" Gruvbox material color scheme settings
+
 
 " nerd comment Settings 
-
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
 
@@ -342,12 +473,14 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
+"
+nnoremap <silent> <leader>c} V}:call nerdcommenter#Comment('x', 'toggle')<CR>
+nnoremap <silent> <leader>c{ V{:call nerdcommenter#Comment('x', 'toggle')<CR>
+map <leader>/ :call nerdcommenter#Comment('x',"toggle")<CR>
 
-nnoremap <silent> <leader>c} V}:call NERDComment('x', 'toggle')<CR>
-nnoremap <silent> <leader>c{ V{:call NERDComment('x', 'toggle')<CR
-map <leader>/ :call NERDComment('x',"toggle")<CR>
+
 
 
 autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
@@ -368,6 +501,7 @@ let g:secure_modelines_allowed_items = [
 
 " Lightline
 let g:lightline = {
+			\ 'colorscheme' : 'catppuccin',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ] ],
@@ -380,7 +514,7 @@ let g:lightline = {
       \ },
       \ }
 
-let g:lightline.colorscheme = 'gruvbox-material'
+" let g:lightline.colorscheme = 'gruvbox'
 
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
@@ -493,7 +627,9 @@ nnoremap <silent> g* g*zz
 nnoremap ? ?\v
 nnoremap / /\v
 cnoremap %s/ %sm/
+nnoremap <SPACE> <Nop>
 
+nnoremap gp `[v`]
 
 
 " =============================================================================
@@ -628,8 +764,7 @@ autocmd Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = "maintained",
-
+  -- ensure_installed = "all",
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
