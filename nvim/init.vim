@@ -48,7 +48,6 @@ Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
 Plug 'hrsh7th/cmp-path', {'branch': 'main'}
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'Maan2003/lsp_lines.nvim'
 
 " Only because nvim-cmp _requires_ snippets
 Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
@@ -91,27 +90,36 @@ if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
   set termguicolors
 endif
 
-let g:catppuccin_flavour = "frappe" " latte, frappe, macchiato, mocha
+let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha
 
 lua << EOF
 local colors = require("catppuccin.palettes").get_palette()
 colors.none = "NONE"
 require("catppuccin").setup({
 
+
 custom_highlights = {
 		DiagnosticVirtualTextError = { bg = colors.none },
 		DiagnosticVirtualTextWarn = { bg = colors.none },
 		DiagnosticVirtualTextInfo = { bg = colors.none },
 		DiagnosticVirtualTextHint = { bg = colors.none },
+		TSVariable = {fg ='#dcf5e5'},
 
 	},
 color_overrides = {
 	frappe = {
 		lavender = "#fcefcc",
 		teal = "#85d4c9",
-		text = "#d5dce3",
 		mantle = "#242424",
-		crust = "#474747",	}
+		crust = "#474747",
+		},
+	macchiato = {
+		},
+	mocha = {
+		base = "#1A1A23"
+		}
+
+
 }
 })
 EOF
@@ -311,13 +319,6 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
-	require("lsp_lines").setup()
-vim.keymap.set(
-  "",
-  "<Leader>l",
-  require("lsp_lines").toggle,
-  { desc = "Toggle lsp_lines" }
-)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -373,13 +374,13 @@ lspconfig.rust_analyzer.setup {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
+    virtual_text = true,
     update_in_insert = false,
   }
 )
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
 })
 local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
@@ -501,24 +502,170 @@ let g:secure_modelines_allowed_items = [
 
 " Lightline
 let g:lightline = {
-			\ 'colorscheme' : 'catppuccin',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileencoding', 'filetype' ] ],
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], ['filetype' ] ]
       \ },
       \ 'component_function': {
-      \   'filename': 'LightlineFilename'
+      \   'fugitive': 'LightlineFugitive',
+      \   'filename': 'LightlineFilename',
+      \   'fileformat': 'LightlineFileformat',
+      \   'filetype': 'LightlineFiletype',
+      \   'fileencoding': 'LightlineFileencoding',
+      \   'mode': 'LightlineMode',
+      \   'ctrlpmark': 'CtrlPMark',
+      \   'lineinfo': 'LightlineLineinfo'
       \ },
+		  \ 'component_visible_condition': {
+      \    'mode' : '1',
+      \    'filename' : '(&filetype!="qf")',
+		   \   'modified': '&modified||!&modifiable',
+		   \   'readonly': '&readonly',
+		   \   'paste': '&paste',
+		   \   'spell': '&spell'
+       \ },
+		  \ 'component_function_visible_condition': {
+      \    'mode' : '1',
+      \    'filename' : '(&filetype!="qf")',
+		   \   'modified': '&modified||!&modifiable',
+		   \   'readonly': '&readonly',
+		   \   'paste': '&paste',
+		   \   'spell': '&spell'
+       \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+			\ 'enable': { 'tabline': 0 },
       \ }
 
-" let g:lightline.colorscheme = 'gruvbox'
+		augroup LightlineColorscheme
+		  autocmd!
+		  autocmd ColorScheme * call s:lightline_update()
+		augroup END
+		function! s:lightline_update()
+		  if !exists('g:loaded_lightline')
+		    return
+		  endif
+		  try
+		    if g:colors_name =~# 'wombat\|solarized\|landscape\|jellybeans\|seoul256\|Tomorrow'
+		      let g:lightline.colorscheme =
+		            \ substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '')
+		      call lightline#init()
+		      call lightline#colorscheme()
+		      call lightline#update()
+		    endif
+		    if g:colors_name =~# 'onedark\|onelight'
+		      let g:lightline.colorscheme = g:colors_name
+		      call lightline#init()
+		      call lightline#colorscheme()
+		      call lightline#update()
+		    endif
+		  catch
+		  endtry
+		endfunction
+
+
+function! LightlineModified()
+  return (&ft =~ 'help' || &ft =~ 'qf') ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
 
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
+  let fname = expand('%:t')
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let branch = fugitive#head()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  if (&filetype=="qf")
+    return 'Results'
+  endif
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 10 ? lightline#mode() : ''
+endfunction
+
+function! LightlineLineinfo()
+  return winwidth(0) > 70 ? (line(".")) : '' 
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+"let g:lightline = {
+"			\ 'colorscheme' : 'catppuccin',
+"      \ 'active': {
+"      \   'left': [ [ 'mode', 'paste' ],
+"      \             [ 'readonly', 'filename', 'modified' ] ],
+"      \   'right': [ [ 'lineinfo' ],
+"      \              [ 'percent' ],
+"      \              [ 'fileencoding', 'filetype' ] ],
+"      \ },
+"      \ 'component_function': {
+"      \   'filename': 'LightlineFilename',
+"      \ },
+"			\ 'component_function_visible_condition' : {'mode' : '1'},
+"      \ }
+"
+"" let g:lightline.colorscheme = 'gruvbox'
+"
+"function! LightlineFilename()
+"  return expand('%:t') !=# '' ? @% : '[No Name]'
+"endfunction
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
