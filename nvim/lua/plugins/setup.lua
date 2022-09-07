@@ -16,9 +16,11 @@ return require("packer").startup(function(use)
 	use("nvim-lua/popup.nvim")
 
 	---GUI
-  	use "mhinz/vim-startify"
 	use 'feline-nvim/feline.nvim'
 
+	-- ColorSchemes
+	use 'folke/tokyonight.nvim'
+	
 	-- Typing features
 	use "tpope/vim-surround"
 	use "tpope/vim-rhubarb"
@@ -49,7 +51,8 @@ return require("packer").startup(function(use)
 	-- Languages enhancemenet
 	use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 	use ("romgrk/nvim-treesitter-context")
-
+	use 'JoosepAlviste/nvim-ts-context-commentstring'
+	use 'numToStr/Comment.nvim'
 	-- LSP Things
 	use("neovim/nvim-lspconfig")
 	use("onsails/lspkind-nvim")
