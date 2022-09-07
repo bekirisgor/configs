@@ -16,7 +16,11 @@ return require("packer").startup(function(use)
 	use("nvim-lua/popup.nvim")
 
 	---GUI
-	use 'feline-nvim/feline.nvim'
+	use({
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	})
+	use 'akinsho/bufferline.nvim'
 
 	-- ColorSchemes
 	use 'folke/tokyonight.nvim'
@@ -37,6 +41,9 @@ return require("packer").startup(function(use)
 	use {"akinsho/toggleterm.nvim"}
 	use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}, {"nvim-telescope/telescope-live-grep-raw.nvim"}}}
 	use "nvim-telescope/telescope-fzy-native.nvim"
+	use("ThePrimeagen/git-worktree.nvim")
+	use("ThePrimeagen/harpoon")
+
 
 
 	-- Languages

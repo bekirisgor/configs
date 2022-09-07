@@ -19,17 +19,17 @@ shell:
   program: /opt/homebrew/bin/fish
 font:
   normal:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Light
-  bold:
-    family: Source Code Pro
-    style: Regular
-  italic:
-    family: Source Code Pro
-    style: Light Italic
-  bold_italic:
-    family: Source Code Pro
-    style: Medium Italic
+    #   bold:
+    #     family: Source Code Pro
+    #     style: Regular
+    #   italic:
+    #     family: Source Code Pro
+    #     style: Light Italic
+    #   bold_italic:
+    #     family: Source Code Pro
+    #     style: Medium Italic
   size: 18.0
   offset:
     x: 0
