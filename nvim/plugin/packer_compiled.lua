@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
+  catppuccin = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -134,6 +139,21 @@ _G.packer_plugins = {
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/hop",
     url = "https://github.com/phaazon/hop.nvim"
   },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
+  },
+  ["kanagawa.nvim"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
+    url = "https://github.com/rebelot/kanagawa.nvim"
+  },
+  ["lsp-status.nvim"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/lsp-status.nvim",
+    url = "https://github.com/nvim-lua/lsp-status.nvim"
+  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
@@ -148,6 +168,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  melange = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/melange",
+    url = "https://github.com/savq/melange"
   },
   neogit = {
     loaded = true,
@@ -168,6 +193,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
+  ["nvim-lsp-ts-utils"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/nvim-lsp-ts-utils",
+    url = "https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -273,6 +303,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
     url = "https://github.com/tpope/vim-rhubarb"
+  },
+  ["vim-startify"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/vim-startify",
+    url = "https://github.com/mhinz/vim-startify"
   },
   ["vim-surround"] = {
     loaded = true,

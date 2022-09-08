@@ -21,9 +21,13 @@ return require("packer").startup(function(use)
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	})
 	use 'akinsho/bufferline.nvim'
+	use 'mhinz/vim-startify'
 
 	-- ColorSchemes
 	use 'folke/tokyonight.nvim'
+	use "savq/melange"
+	use "rebelot/kanagawa.nvim"
+	use { "catppuccin/nvim", as = "catppuccin" }
 	
 	-- Typing features
 	use "tpope/vim-surround"
@@ -43,7 +47,8 @@ return require("packer").startup(function(use)
 	use "nvim-telescope/telescope-fzy-native.nvim"
 	use("ThePrimeagen/git-worktree.nvim")
 	use("ThePrimeagen/harpoon")
-
+	use {"phaazon/hop.nvim", as = "hop"}
+	use 'lewis6991/impatient.nvim'
 
 
 	-- Languages
@@ -52,19 +57,20 @@ return require("packer").startup(function(use)
 	use "jparise/vim-graphql"
 	use "fatih/vim-go"
 	use "norcalli/nvim-colorizer.lua"
-	use {"phaazon/hop.nvim", as = "hop"}
 
 
 	-- Languages enhancemenet
 	use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 	use ("romgrk/nvim-treesitter-context")
 	use 'JoosepAlviste/nvim-ts-context-commentstring'
+	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	use 'numToStr/Comment.nvim'
 	-- LSP Things
 	use("neovim/nvim-lspconfig")
 	use("onsails/lspkind-nvim")
 	use("glepnir/lspsaga.nvim")
 	use("simrat39/symbols-outline.nvim")
+	use 'nvim-lua/lsp-status.nvim'
 
 	--Completitions
 	use("hrsh7th/cmp-nvim-lsp")

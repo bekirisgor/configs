@@ -1,13 +1,13 @@
 
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
 
 vim.o.termguicolors = true
-vim.cmd("syntax on")
+vim.cmd("syntax off")
 vim.o.mouse = true
 vim.o.visualbell = true
 vim.o.errorbells = false
 vim.o.showcmd = true
-vim.o.mouse = true
+vim.o.mouse = 'a'
 vim.o.foldenable = false
 vim.opt.number = true
 vim.opt.relativenumber = true
