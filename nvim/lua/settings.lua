@@ -1,31 +1,27 @@
-
 -- vim.o.clipboard = 'unnamedplus'
-
+vim.o.shell = "/bin/bash"
 vim.o.termguicolors = true
-vim.cmd("syntax off")
-vim.o.mouse = true
+vim.cmd("syntax enable")
 vim.o.visualbell = true
 vim.o.errorbells = false
 vim.o.showcmd = true
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 vim.o.foldenable = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.o.lazyredraw = true
-vim.o.synmaxcol=500
-vim.o.laststatus=2
+vim.o.synmaxcol = 500
+vim.o.laststatus = 2
 vim.o.colorcolumn = 80
 vim.o.linebreak = true
 vim.o.timeoutlen = 300
 
-vim.o.undodir=os.getenv("HOME") .. "/.vim/undodir"
-vim.o.undofile =true
-
+vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.o.undofile = true
 
 vim.o.autoindent = true
-vim.scrolloff = 2
-vim.showmode = false
+vim.o.scrolloff = 2
 
 vim.o.showmode = false
 vim.o.swapfile = false
@@ -46,8 +42,7 @@ vim.wo.cursorline = true
 vim.wo.signcolumn = "yes"
 vim.o.hidden = true
 
-vim.o.fileencodings = 'utf-8'
-
+vim.o.fileencodings = "utf-8"
 
 vim.o.incsearch = true
 vim.o.hlsearch = true
@@ -60,27 +55,28 @@ vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.smartindent = true
 
-vim.o.formatoptions= vim.o.formatoptions .. 'tcrqbn'
+vim.o.formatoptions = vim.o.formatoptions .. "tcrqbn"
 vim.o.wildmenu = true
-vim.o.wildmode='list:longest'
+vim.o.wildmode = "list:longest"
 
-vim.o.wildignore ='.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor'
+vim.o.wildignore =
+	".hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor"
 
-vim.o.listchars = 'nbsp:¬,extends:»,precedes:«,trail:•'
+vim.o.listchars = "nbsp:¬,extends:»,precedes:«,trail:•"
 
-vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'noselect' }
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
-vim.opt.diffopt:append('context:3')
-vim.opt.diffopt:append('vertical')
-vim.opt.diffopt:append('foldcolumn:1')
-vim.opt.diffopt:append('hiddenoff')
-vim.opt.diffopt:append('indent-heuristic')
-vim.opt.diffopt:append('algorithm:patience')
+vim.opt.diffopt:append("context:3")
+vim.opt.diffopt:append("vertical")
+vim.opt.diffopt:append("foldcolumn:1")
+vim.opt.diffopt:append("hiddenoff")
+vim.opt.diffopt:append("indent-heuristic")
+vim.opt.diffopt:append("algorithm:patience")
 
-vim.opt.shortmess:append "sI"
+-- vim.opt.shortmess:append "sI"
 
 -- -- Disable builtin plugins
-local disabled_built_ins = {
+--[[ local disabled_built_ins = {
    "2html_plugin",
    "getscript",
    "getscriptPlugin",
@@ -105,9 +101,8 @@ local disabled_built_ins = {
    "optwin",
    "compiler",
    "bugreport",
-   "ftplugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
    vim.g["loaded_" .. plugin] = 1
-end
+end ]]

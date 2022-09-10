@@ -13,7 +13,7 @@ map("n", "<leader>j", "<C-^>")
 -- open new file adjancet to current file - jonhoo
  map('n', '<leader>o',':e <C-R>=expand("%:p:h") . "/" <CR>')
  map('', '<leader>c', ':w !pbcopy -ib<cr><cr>')
- map('', '<leader>p', ':read !pbpaste --clipboard --output<cr>')
+ map('', '<leader>u', ':read !pbpaste --clipboard --output<cr>')
 
 
 map("n", ";", ":")
@@ -34,7 +34,7 @@ map('n', '<right>', ':bn<cr>')
 map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
 map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
 
-map('n', '<C-n>', ':NvimTreeToggle<CR>')            -- open/close
+map('n', '<C-b>', ':NvimTreeToggle<CR>')            -- open/close
 map('n', '<leader>s', ':NvimTreeRefresh<CR>')       -- refresh
 map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file
 
@@ -46,7 +46,7 @@ map({'n','v'}, '#', '#zz', {noremap=true,silent=true})
 map({'n','v'}, '*', '*zz', {noremap=true,silent=true})
 map({'n','v'}, 'g*', 'g*zz', {noremap=true,silent=true})
 
-map('n','<leader>l','<cmd>lua require("telescope.builtin").find_files()<cr>')
+map('n','<leader>p','<cmd>lua require("telescope.builtin").find_files()<cr>')
 map('n','<leader>gg' ,'<cmd>lua require("telescope.builtin").live_grep()<cr>')
 map('n','<leader>gb', '<cmd>lua require("telescope.builtin").buffers()<cr>')
 map('n','<leader>gh', '<cmd>lua require("telescope.builtin").help_tags()<cr>')
@@ -70,9 +70,9 @@ map("", "L", ":HopWordCurrentLine<cr>", { silent = true })
 map("", "M", ":HopPattern<cr>", { silent = true })
 map("", "H", ":HopChar2<cr>", { silent = true })
 
-map({'n','v'}, 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-map({'n','v'}, 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
-map({'n','v'}, 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", {})
-map({'n','v'}, 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>", {})
+-- map({'n','v'}, 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+-- map({'n','v'}, 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+-- map({'n','v'}, 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", {})
+-- map({'n','v'}, 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>", {})
 
 

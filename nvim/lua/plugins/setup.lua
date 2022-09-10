@@ -49,6 +49,7 @@ return require("packer").startup(function(use)
 	use("ThePrimeagen/harpoon")
 	use {"phaazon/hop.nvim", as = "hop"}
 	use 'lewis6991/impatient.nvim'
+	use 'jose-elias-alvarez/null-ls.nvim'
 
 
 	-- Languages
