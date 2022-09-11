@@ -19,21 +19,21 @@ require("toggleterm").setup({
 	hide_numbers = true, -- hide the number column in toggleterm buffers
 	shade_filetypes = {},
 	autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
-	--[[ highlights = {
+	highlights = {
     -- highlights which map to a highlight group name and a table of it's values
     -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
     Normal = {
-      guibg = "<VALUE-HERE>",
+      guibg = "none",
     },
     NormalFloat = {
-      link = 'Normal'
+			guibg = "none"
     },
-    FloatBorder = {
+    --[[ FloatBorder = {
       guifg = "<VALUE-HERE>",
       guibg = "<VALUE-HERE>",
-    },
-  }, ]]
-	shade_terminals = true, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
+    }, ]]
+  },
+	shade_terminals = false, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
 	-- shading_factor = '<number>', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
 	start_in_insert = true,
 	insert_mappings = true, -- whether or not the open mapping applies in insert mode
@@ -54,7 +54,7 @@ require("toggleterm").setup({
 		-- like `size`, width and height can be a number or function which is passed the current terminal
 		-- width = <value>,
 		-- height = <value>,
-		winblend = 3,
+		-- winblend = 3,
 	},
 	winbar = {
 		enabled = false,
