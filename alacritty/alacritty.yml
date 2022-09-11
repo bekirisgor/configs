@@ -11,6 +11,8 @@ window:
     x: 10
     y: 10
   # Dimensions if not SimpleFullscreen
+  opacity: 0.6
+
   dimensions:
     columns: 140
     lines: 38
@@ -30,7 +32,7 @@ font:
     #   bold_italic:
     #     family: Source Code Pro
     #     style: Medium Italic
-  size: 14.0
+  size: 15.0
   offset:
     x: 0
     y: 0
@@ -39,8 +41,6 @@ font:
     y: 0
   use_thin_strokes: true
 color_schemes:
-
-
 
   latte: &latte
 
@@ -374,7 +374,7 @@ color_schemes:
 
 
 
-colors: *frappe
+colors: *macchiato
 
   # colors:
   #   primary:

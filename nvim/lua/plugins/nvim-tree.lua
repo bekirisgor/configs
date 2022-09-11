@@ -27,6 +27,10 @@ nvim_tree.setup {
     "dashboard",
     "alpha",
   },
+	trash = {
+		cmd = "trash",
+		require_confirm = true
+	},
   filters = {
     custom = { ".git" },
     exclude = { ".gitignore" },

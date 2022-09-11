@@ -15,7 +15,7 @@ vim.o.synmaxcol = 500
 vim.o.laststatus = 2
 vim.o.colorcolumn = 80
 vim.o.linebreak = true
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 800
 
 vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.o.undofile = true

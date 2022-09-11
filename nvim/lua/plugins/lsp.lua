@@ -100,8 +100,18 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 	buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 	buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-	buf_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+	buf_set_keymap("n", "<space>ql", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", opts)
+
+	 require "lsp_signature".on_attach({
+    doc_lines = 10,
+		max_height = 20,
+		floating_window = false,
+		padding = '  ',
+    handler_opts = {
+      border = "rounded"
+    },
+  })
 end
 
 --[[
