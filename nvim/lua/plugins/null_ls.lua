@@ -35,10 +35,13 @@ null_ls.setup({
 			filetypes = { "python" },
 			extra_args = { "--indent-size=2" },
 		}),
-		null_ls.builtins.diagnostics.eslint_d.with({
+		null_ls.builtins.diagnostics.eslint.with({
 			extra_args = { "--stdin-filename", ".eslintrc.js" },
 		}),
-		null_ls.builtins.code_actions.eslint_d,
+		null_ls.builtins.code_actions.eslint.with({
+			extra_args = { "--stdin-filename", ".eslintrc.js" },
+		}),
+
 		-- null_ls.builtins.formatting.prettier_d_slim,
 		null_ls.builtins.formatting.prettierd,
 	},
