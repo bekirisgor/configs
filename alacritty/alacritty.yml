@@ -11,7 +11,17 @@ window:
     x: 10
     y: 10
   # Dimensions if not SimpleFullscreen
-  opacity: 0.6
+  opacity: 0.3
+
+ # Window decorations
+  #
+  # Available values:
+  # - full: borders and title bar
+  # - none: neither borders nor title bar
+  # - transparent: title bar, transparent background and title bar buttons
+  # - buttonless: title bar, transparent background, but no title bar buttons
+  decorations: buttonless
+  # startup_mode: SimpleFullscreen
 
   dimensions:
     columns: 140
@@ -19,6 +29,8 @@ window:
 
 shell:
   program: /opt/homebrew/bin/fish
+  args:
+    - --command=tmux attach
 font:
   normal:
     family: SauceCodePro Nerd Font
@@ -403,6 +415,8 @@ colors: *macchiato
 key_bindings:
   # Rename the current tmux window
   - { key: Comma, mods: Command, chars: "\x02\x2c" }
+  - { key: Return,   mods: Command, action: ToggleFullscreen             }
+
   # Select a new tmux session for the attached client interactively
   - { key: K, mods: Command, chars: "\x02\x73" }
   # Select window 1-9
