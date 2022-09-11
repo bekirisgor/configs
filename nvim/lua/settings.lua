@@ -1,4 +1,7 @@
 -- vim.o.clipboard = 'unnamedplus'
+--
+vim.cmd[[hi NvimTreeNormal guibg=NONE ctermbg=NONE]]
+
 vim.o.shell = "/bin/bash"
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -9,6 +12,7 @@ vim.o.mouse = "a"
 vim.o.foldenable = false
 vim.opt.number = true
 vim.opt.relativenumber = true
+
 
 vim.o.lazyredraw = true
 vim.o.synmaxcol = 500
@@ -23,6 +27,7 @@ vim.o.undofile = true
 vim.o.autoindent = true
 vim.o.scrolloff = 2
 
+vim.o.ruler = false
 vim.o.showmode = false
 vim.o.swapfile = false
 vim.o.backup = false
@@ -38,7 +43,7 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.backspace = "indent,eol,start"
 vim.wo.wrap = false
-vim.wo.cursorline = true
+vim.wo.cursorline = false
 vim.wo.signcolumn = "yes"
 vim.o.hidden = true
 

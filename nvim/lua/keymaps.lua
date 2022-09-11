@@ -23,8 +23,8 @@ map("n", "<C-H>", "<C-W>h")
 map("n", "<C-L>", "<C-W>l")
 
 -- Disable arrow keys
-map({ "i", "n" }, "<up>", "<nop>")
-map({ "i", "n" }, "<down>", "<nop>")
+map({ "i", "n", "v" }, "<up>", "<nop>")
+map({ "i", "n", "v" }, "<down>", "<nop>")
 map("", "<left>", "<nop>")
 map("", "<right>", "<nop>")
 map("n", "<left>", ":bp<cr>")
