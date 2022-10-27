@@ -1,5 +1,5 @@
 local null_ls = require("null-ls")
-local function select_null_ls_client()
+--[[ local function select_null_ls_client()
 	local clients = vim.tbl_values(vim.lsp.buf_get_clients())
 	for _, client in ipairs(clients) do
 		if client.name == "null-ls" then
@@ -23,7 +23,34 @@ _G.formatting = function(bufnr, options, timeout_ms)
 	if result and result.result then
 		vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
 	elseif err then
-		vim.notify("vim.lsp.buf.formatting_sync: " .. err, vim.log.levels.WARN)
+		vim.notify("vim.lsp.buf.format(): " .. err, vim.log.levels.WARN)
+	end
+end ]]
+
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format({
+		filter = function(client)
+			-- apply whatever logic you want (in this example, we'll only use null-ls)
+			return client.name == "null-ls"
+		end,
+		bufnr = bufnr,
+	})
+end
+
+-- if you want to set up formatting on save, you can use this as a callback
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+-- add to your shared on_attach callback
+local on_attach = function(client, bufnr)
+	if client.supports_method("textDocument/formatting") then
+		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = augroup,
+			buffer = bufnr,
+			callback = function()
+				lsp_formatting(bufnr)
+			end,
+		})
 	end
 end
 
@@ -36,23 +63,23 @@ null_ls.setup({
 			extra_args = { "--indent-size=2" },
 		}),
 		null_ls.builtins.diagnostics.eslint.with({
-			extra_args = { "--stdin-filename", ".eslintrc.js" },
+			-- extra_args = { "--stdin-filename", ".eslintrc.js" },
 		}),
 		null_ls.builtins.code_actions.eslint.with({
-			extra_args = { "--stdin-filename", ".eslintrc.js" },
+			-- extra_args = { "--stdin-filename", ".eslintrc.js" },
 		}),
-
 		-- null_ls.builtins.formatting.prettier_d_slim,
-		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.prettier,
+		-- on_attach = on_attach,
 	},
-	on_attach = function(client)
-		if client.server_capabilities.document_formatting then
-			vim.cmd([[
-      augroup LspFormatting
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> luanull_ls.builtins.formatting()
-      augroup END
-      ]])
-		end
-	end,
+	-- on_attach = function(client)
+	-- 	if client.server_capabilities.document_formatting then
+	-- 		vim.cmd([[
+	--      augroup LspFormatting
+	--        autocmd! * <buffer>
+	--        autocmd BufWritePre <buffer> luanull_ls.builtins.format()
+	--      augroup END
+	--      ]])
+	-- 	end
+	-- end,
 })

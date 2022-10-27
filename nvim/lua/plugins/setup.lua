@@ -68,7 +68,7 @@ return require("packer").startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim")
 
 	-- Languages
-	use("leafgarland/typescript-vim")
+	-- use("leafgarland/typescript-vim")
 	use("MaxMEllon/vim-jsx-pretty")
 	use("jparise/vim-graphql")
 	use("fatih/vim-go")

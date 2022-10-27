@@ -6,15 +6,13 @@ map("n", "<space>", "<nop>")
 
 map("n", "<leader>v", ":e ~/.config/nvim/init.lua<CR>")
 
-map("n", "<leader>h", ":nohlsearch<cr>")
+map("n", "<C-y>", ":nohlsearch<cr>")
 map("n", "<leader>j", "<C-^>")
 
 -- open new file adjancet to current file - jonhoo
 map("n", "<leader>o", ':e <C-R>=expand("%:p:h") . "/" <CR>')
 map("", "<leader>c", ":w !pbcopy -ib<cr><cr>")
 map("", "<leader>u", ":read !pbpaste --clipboard --output<cr>")
-
-map("n", ";", ":")
 
 -- Better navigation
 map("n", "<C-J>", "<C-W>j")
@@ -27,8 +25,9 @@ map({ "i", "n", "v" }, "<up>", "<nop>")
 map({ "i", "n", "v" }, "<down>", "<nop>")
 map("", "<left>", "<nop>")
 map("", "<right>", "<nop>")
-map("n", "<left>", ":bp<cr>")
-map("n", "<right>", ":bn<cr>")
+map("n", "<leader>,", ":bp<cr>")
+map("n", "<leader>.", ":bn<cr>")
+map("n", "<leader>w", ":bd<cr>")
 
 map("n", "<leader>tk", "<C-w>t<C-w>K") -- change vertical to horizontal
 map("n", "<leader>th", "<C-w>t<C-w>H") -- change horizontal to vertical
@@ -45,12 +44,14 @@ map({ "n", "v" }, "#", "#zz", { noremap = true, silent = true })
 map({ "n", "v" }, "*", "*zz", { noremap = true, silent = true })
 map({ "n", "v" }, "g*", "g*zz", { noremap = true, silent = true })
 
+map({ "n", "v" }, "{", "{zz", { noremap = true, silent = true })
+map({ "n", "v" }, "}", "}zz", { noremap = true, silent = true })
+
 map("n", "<leader>p", '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map("n", "<leader>gg", '<cmd>lua require("telescope.builtin").live_grep()<cr>')
 map("n", "<leader>gb", '<cmd>lua require("telescope.builtin").buffers()<cr>')
 map("n", "<leader>gh", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
 
--- Harpoon Thanks prime
 -- Terminal commands
 -- ueoa is first through fourth finger left hand home row.
 -- This just means I can crush, with opposite hand, the 4 terminal positions
