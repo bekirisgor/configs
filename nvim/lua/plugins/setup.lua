@@ -62,6 +62,12 @@ return require("packer").startup(function(use)
 	})
 	use("nvim-telescope/telescope-fzy-native.nvim")
 	use("ThePrimeagen/git-worktree.nvim")
+	use({
+		"notjedi/nvim-rooter.lua",
+		config = function()
+			require("nvim-rooter").setup()
+		end,
+	})
 	use("ThePrimeagen/harpoon")
 	use({ "phaazon/hop.nvim", as = "hop" })
 	use("lewis6991/impatient.nvim")
