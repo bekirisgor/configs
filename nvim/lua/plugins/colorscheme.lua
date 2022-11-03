@@ -37,49 +37,93 @@ require("tokyonight").setup({
 
 -- vim.api.nvim_command('colorscheme catppuccin')
 
-vim.g.catppuccin_flavour = "mocha"
-catppuccin.setup({
-	transparent_background = true,
-	term_colors = true,
-	--[[ dim_inactive = {
-		enabled = true,
-		shade = "dark",
-		percentage = 0.15,
-	}, ]]
-	compile = {
-		enabled = true,
-		path = vim.fn.stdpath("cache") .. "/catppuccin",
-	},
-	integrations = {
-		gitsigns = true,
-		hop = false,
-		cmp = true,
-		nvimtree = { enabled = true, show_root = true, transparent_panel = true },
-		telescope = true,
-		native_lsp = {
-			enabled = true,
-		},
+-- vim.g.catppuccin_flavour = "mocha"
+-- catppuccin.setup({
+-- 	transparent_background = true,
+-- 	term_colors = true,
+-- 	--[[ dim_inactive = {
+-- 		enabled = true,
+-- 		shade = "dark",
+-- 		percentage = 0.15,
+-- 	}, ]]
+-- 	compile = {
+-- 		enabled = true,
+-- 		path = vim.fn.stdpath("cache") .. "/catppuccin",
+-- 	},
+-- 	integrations = {
+-- 		gitsigns = true,
+-- 		hop = false,
+-- 		cmp = true,
+-- 		nvimtree = { enabled = true, show_root = true, transparent_panel = true },
+-- 		telescope = true,
+-- 		native_lsp = {
+-- 			enabled = true,
+-- 		},
+-- 	},
+--
+-- 	custom_highlights = {
+-- 		DiagnosticVirtualTextError = { bg = "NONE" },
+-- 		DiagnosticVirtualTextWarn = { bg = "NONE" },
+-- 		DiagnosticVirtualTextInfo = { bg = "NONE" },
+-- 		DiagnosticVirtualTextHint = { bg = "NONE" },
+-- 		-- TSVariable = { fg = "#dcf5e5" },
+-- 	},
+-- 	color_overrides = {
+-- 		mocha = {
+-- 			-- yellow = "#F9E2AF",
+-- 			-- green = "#A6E3A1",
+-- 			-- teal = "#e1eaf5",
+-- 			-- sky = "#89DCEB",
+-- 			-- sapphire = "#f78f6d",
+-- 		},
+-- 	},
+-- })
+
+require('rose-pine').setup({
+	--- @usage 'main' | 'moon'
+	dark_variant = 'main',
+	bold_vert_split = false,
+	dim_nc_background = false,
+	disable_background = false,
+	disable_float_background = false,
+	disable_italics = false,
+
+	--- @usage string hex value or named color from rosepinetheme.com/palette
+	groups = {
+		background = 'base',
+		panel = 'surface',
+		border = 'highlight_med',
+		comment = 'muted',
+		link = 'iris',
+		punctuation = 'subtle',
+
+		error = 'love',
+		hint = 'iris',
+		info = 'foam',
+		warn = 'gold',
+
+		headings = {
+			h1 = 'iris',
+			h2 = 'foam',
+			h3 = 'rose',
+			h4 = 'gold',
+			h5 = 'pine',
+			h6 = 'foam',
+		}
+		-- or set all headings at once
+		-- headings = 'subtle'
 	},
 
-	custom_highlights = {
-		DiagnosticVirtualTextError = { bg = "NONE" },
-		DiagnosticVirtualTextWarn = { bg = "NONE" },
-		DiagnosticVirtualTextInfo = { bg = "NONE" },
-		DiagnosticVirtualTextHint = { bg = "NONE" },
-		-- TSVariable = { fg = "#dcf5e5" },
-	},
-	color_overrides = {
-		mocha = {
-			-- yellow = "#F9E2AF",
-			-- green = "#A6E3A1",
-			-- teal = "#e1eaf5",
-			-- sky = "#89DCEB",
-			-- sapphire = "#f78f6d",
-		},
-	},
+	-- Change specific vim highlight groups
+	highlight_groups = {
+		ColorColumn = { bg = 'rose' }
+	}
 })
 
-vim.cmd("colorscheme catppuccin")
+-- set colorscheme after options
+vim.cmd('colorscheme rose-pine')
+
+-- vim.cmd("colorscheme catppuccin")
 
 --
 --vim.cmd([[colorscheme catppuccin]])

@@ -28,7 +28,7 @@ return require("packer").startup(function(use)
 	use("savq/melange")
 	use("rebelot/kanagawa.nvim")
 	use({ "catppuccin/nvim", as = "catppuccin", run = ":CatppuccinCompile" })
-
+	use({ "rose-pine/neovim", as = "rose-pine" })
 	-- Typing features
 	--[[ use({
 		"kylechui/nvim-surround",

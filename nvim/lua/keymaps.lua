@@ -4,8 +4,6 @@ local map = utils.keymap
 vim.g.mapleader = " "
 map("n", "<space>", "<nop>")
 
-map("n", "<leader>v", ":e ~/.config/nvim/init.lua<CR>")
-
 map("n", "<C-y>", ":nohlsearch<cr>")
 map("n", "<leader>j", "<C-^>")
 
@@ -25,8 +23,9 @@ map({ "i", "n", "v" }, "<up>", "<nop>")
 map({ "i", "n", "v" }, "<down>", "<nop>")
 map("", "<left>", "<nop>")
 map("", "<right>", "<nop>")
-map("n", "<leader>,", ":bp<cr>")
-map("n", "<leader>.", ":bn<cr>")
+
+map("n", "<left>", ":bp<cr>")
+map("n", "<right>", ":bn<cr>")
 map("n", "<leader>w", ":bd<cr>")
 
 map("n", "<leader>tk", "<C-w>t<C-w>K") -- change vertical to horizontal
