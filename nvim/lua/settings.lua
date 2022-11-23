@@ -1,6 +1,6 @@
 -- vim.o.clipboard = 'unnamedplus'
 --
-vim.cmd[[hi NvimTreeNormal guibg=NONE ctermbg=NONE]]
+vim.cmd([[hi NvimTreeNormal guibg=NONE ctermbg=NONE]])
 
 vim.o.shell = "/bin/bash"
 vim.o.termguicolors = true
@@ -13,7 +13,6 @@ vim.o.foldenable = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-
 vim.o.lazyredraw = true
 vim.o.synmaxcol = 500
 vim.o.laststatus = 2
@@ -23,6 +22,7 @@ vim.o.timeoutlen = 800
 
 vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.o.undofile = true
+vim.o.undolevel = 5
 
 vim.o.autoindent = true
 vim.o.scrolloff = 2
@@ -59,13 +59,14 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.smartindent = true
+vim.o.smarttab = true
 
 vim.o.formatoptions = vim.o.formatoptions .. "tcrqbn"
 vim.o.wildmenu = true
 vim.o.wildmode = "list:longest"
 
 vim.o.wildignore =
-	".hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor"
+".hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor"
 
 vim.o.listchars = "nbsp:¬,extends:»,precedes:«,trail:•"
 

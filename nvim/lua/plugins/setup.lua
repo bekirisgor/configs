@@ -1,4 +1,4 @@
-local execute = vim.api.nvim_command
+local execute = vim.api.nvim_commandsetup
 local fn = vim.fn
 
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -71,7 +71,8 @@ return require("packer").startup(function(use)
 	use("ThePrimeagen/harpoon")
 	use({ "phaazon/hop.nvim", as = "hop" })
 	use("lewis6991/impatient.nvim")
-	use("jose-elias-alvarez/null-ls.nvim")
+	use({ "vimwiki/vimwiki" })
+	use("lukas-reineke/indent-blankline.nvim")
 
 	-- Languages
 	-- use("leafgarland/typescript-vim")
@@ -86,11 +87,13 @@ return require("packer").startup(function(use)
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("jose-elias-alvarez/nvim-lsp-ts-utils")
 	use("numToStr/Comment.nvim")
+	use("jose-elias-alvarez/null-ls.nvim")
+
 	-- LSP Things
 	use("neovim/nvim-lspconfig")
 	use("onsails/lspkind-nvim")
 	use("glepnir/lspsaga.nvim")
-	use("simrat39/symbols-outline.nvim")
+	use({ "simrat39/symbols-outline.nvim" }, require("symbols-outline").setup())
 	use("nvim-lua/lsp-status.nvim")
 	use("ray-x/lsp_signature.nvim")
 

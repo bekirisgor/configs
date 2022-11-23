@@ -144,6 +144,11 @@ _G.packer_plugins = {
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
   ["kanagawa.nvim"] = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
@@ -334,6 +339,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
+  },
+  vimwiki = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/vimwiki",
+    url = "https://github.com/vimwiki/vimwiki"
   }
 }
 

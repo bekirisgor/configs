@@ -11,7 +11,7 @@ window:
     x: 10
     y: 10
   # Dimensions if not SimpleFullscreen
-  opacity: 0.3
+  opacity: 1
 
  # Window decorations
   #
@@ -29,12 +29,17 @@ window:
 
 shell:
   program: /opt/homebrew/bin/fish
-  args:
-    - --command=tmux attach
+#  args:
+#    - --command=tmux attach
 font:
   normal:
-    family: SauceCodePro Nerd Font
-    style: Light
+    family: JetBrainsMono Nerd Font Mono
+    # family: Inconsolata Nerd Font Mono
+    # family: SauceCodePro Nerd Font Mono
+    # family: OperatorMono Nerd Font 
+    # family: JetBrainsMono Nerd Font
+    # antialiasing: false
+    style: Medium
     #   bold:
     #     family: Source Code Pro
     #     style: Regular
@@ -44,14 +49,13 @@ font:
     #   bold_italic:
     #     family: Source Code Pro
     #     style: Medium Italic
-  size: 15.0
+  size: 16.0
   offset:
     x: 0
     y: 0
   glyph_offset:
     x: 0
     y: 0
-  use_thin_strokes: true
 color_schemes:
 
   latte: &latte
@@ -224,7 +228,7 @@ color_schemes:
 
     # Default colors
     primary:
-      background: '#24273A' # base
+      background: '#14181D' # base
       foreground: '#CAD3F5' # text
       # Bright and dim foreground colors
       dim_foreground: '#CAD3F5' # text

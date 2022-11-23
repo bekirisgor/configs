@@ -18,7 +18,7 @@ cmp.setup {
   enabled = true,
   debug = false,
   min_length = 0,
-  preselect = "enable",
+  preselect = "disable",
   throttle_time = 80,
   source_timeout = 200,
   incomplete_delay = 400,
@@ -65,18 +65,18 @@ cmp.setup {
   --   end
    },
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
   },
   -- Load sources, see: https://github.com/topics/nvim-cmp
   sources = {
 	  -- TODO: currently snippets from lsp end up getting prioritized -- stop that!
 	  { name = "nvim_lsp_signature_help" },
 	  { name = 'nvim_lsp' },
-	  { name = 'path' },
 	  { name = "treesitter" },
 	  { name = "buffer" },
-	  { name = "luasnip" },
+	  { name = 'path' },
 	  { name = "nvim_lua" },
+	  { name = "luasnip" },
 
   },
 }
@@ -88,5 +88,5 @@ cmp.setup.cmdline(':', {
   })
 })
 
-local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+-- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
