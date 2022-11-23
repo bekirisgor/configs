@@ -1,4 +1,5 @@
 fish/fish_variables
+fish/fishd.tmp*
 nvim/plugged
 **/.DS_Store
 configstore
