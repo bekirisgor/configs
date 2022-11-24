@@ -1,4 +1,6 @@
 fish/fish_variables
+fish/functions*
+fish/completions*
 fish/fishd.tmp*
 nvim/plugged
 **/.DS_Store
