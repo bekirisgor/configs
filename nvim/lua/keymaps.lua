@@ -1,8 +1,8 @@
 local utils = require("utils")
 local map = utils.keymap
 
-vim.g.mapleader = " "
 map("n", "<space>", "<nop>")
+vim.g.mapleader = " "
 
 map("n", "<C-y>", ":nohlsearch<cr>")
 map("n", "<leader>j", "<C-^>")
@@ -24,16 +24,14 @@ map({ "i", "n", "v" }, "<down>", "<nop>")
 map("", "<left>", "<nop>")
 map("", "<right>", "<nop>")
 
-map("n", "<left>", ":bp<cr>")
-map("n", "<right>", ":bn<cr>")
-map("n", "<leader>w", ":bd<cr>")
+map("n", "<C-N>", ":bp<cr>")
+map("n", "<C-P>", ":bn<cr>")
+map("n", "<leader>d", ":bd<cr>")
 
 map("n", "<leader>tk", "<C-w>t<C-w>K") -- change vertical to horizontal
 map("n", "<leader>th", "<C-w>t<C-w>H") -- change horizontal to vertical
 
 map("n", "<leader>b", ":NvimTreeToggle<CR>") -- open/close
-map("n", "<leader>s", ":NvimTreeRefresh<CR>") -- refresh
-map("n", "<leader>n", ":NvimTreeFindFile<CR>") -- search file
 
 -- magic
 
@@ -53,7 +51,7 @@ map("n", "<leader>gh", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
 -- This just means I can crush, with opposite hand, the 4 terminal positions
 --
 -- These functions are stored in harpoon.  A plugn that I am developing
-map("n", "<leader>q", function()
+--[[ map("n", "<leader>q", function()
 	require("harpoon.mark").add_file()
 end, { noremap = true, silent = true })
 map("n", "<leader>r", function()
@@ -74,7 +72,7 @@ map("n", "3g", function()
 end, { noremap = true, silent = true })
 map("n", "4g", function()
 	require("harpoon.ui").nav_file(4)
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true }) ]]
 
 map("", "L", ":HopWordCurrentLine<cr>", { silent = true })
 -- keymap("", "S", ":HopChar2<cr>", { silent = true })

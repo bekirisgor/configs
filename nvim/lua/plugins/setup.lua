@@ -61,14 +61,14 @@ return require("packer").startup(function(use)
 		},
 	})
 	use("nvim-telescope/telescope-fzy-native.nvim")
-	use("ThePrimeagen/git-worktree.nvim")
+	-- use("ThePrimeagen/git-worktree.nvim")
 	use({
 		"notjedi/nvim-rooter.lua",
 		config = function()
 			require("nvim-rooter").setup()
 		end,
 	})
-	use("ThePrimeagen/harpoon")
+	-- use("ThePrimeagen/harpoon")
 	use({ "phaazon/hop.nvim", as = "hop" })
 	use("lewis6991/impatient.nvim")
 	use({ "vimwiki/vimwiki" })
@@ -76,30 +76,32 @@ return require("packer").startup(function(use)
 
 	-- Languages
 	-- use("leafgarland/typescript-vim")
+	use("jose-elias-alvarez/typescript.nvim")
 	use("MaxMEllon/vim-jsx-pretty")
 	use("jparise/vim-graphql")
 	use("fatih/vim-go")
+	use("simrat39/rust-tools.nvim")
+
 	use("norcalli/nvim-colorizer.lua")
 
 	-- Languages enhancemenet
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("romgrk/nvim-treesitter-context")
+	-- use("romgrk/nvim-treesitter-context")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use("jose-elias-alvarez/nvim-lsp-ts-utils")
 	use("numToStr/Comment.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
 
 	-- LSP Things
 	use("neovim/nvim-lspconfig")
-	use("onsails/lspkind-nvim")
-	use("glepnir/lspsaga.nvim")
+	-- use("onsails/lspkind-nvim")
+	-- use("glepnir/lspsaga.nvim")
 	use({ "simrat39/symbols-outline.nvim" }, require("symbols-outline").setup())
 	use("nvim-lua/lsp-status.nvim")
 	use("ray-x/lsp_signature.nvim")
 
 	--Completitions
 	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
+	-- use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-path")

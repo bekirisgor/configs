@@ -16,17 +16,21 @@ end
 
 -- Add additional capabilities supported by nvim-cmp
 -- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
---[[
-vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-  if err ~= nil or result == nil then return end
 
-  if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-    local view = vim.fn.winsaveview()
-    vim.lsp.util.apply_text_edits(result, bufnr)
-    vim.fn.winrestview(view)
-    if bufnr == vim.api.nvim_get_current_buf() then vim.api.nvim_command("noautocmd :update") end
-  end
-end ]]
+vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
+	if err ~= nil or result == nil then
+		return
+	end
+
+	if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+		local view = vim.fn.winsaveview()
+		vim.lsp.util.apply_text_edits(result, bufnr)
+		vim.fn.winrestview(view)
+		if bufnr == vim.api.nvim_get_current_buf() then
+			vim.api.nvim_command("noautocmd :update")
+		end
+	end
+end
 
 vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
 vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
@@ -60,12 +64,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.preselectSupport = true
+-- capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
 capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
 capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+-- capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
 	properties = {
@@ -86,10 +90,10 @@ local on_attach = function(client, bufnr)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
 
-	if client.name == "tsserver" then
+	--[[ if client.name == "tsserver" then
 		client.server_capabilities.document_formatting = false
 		client.server_capabilities.document_range_formatting = false
-	end
+	end ]]
 
 	-- -- Highlighting references
 	-- if client.server_capabilities.document_highlight then
@@ -177,7 +181,41 @@ lspconfig.sumneko_lua.setup({
 -- map buffer local keybindings when the language server attaches.
 -- Add your language server below:
 
-local servers = { "bashls", "pyright", "clangd", "html", "cssls", "tsserver", "yamlls" }
+require("typescript").setup({
+	disable_commands = false, -- prevent the plugin from creating Vim commands
+	debug = false, -- enable debug logging for commands
+	go_to_source_definition = {
+		fallback = true, -- fall back to standard LSP definition on failure
+	},
+	server = { -- pass options to lspconfig's setup method
+		on_attach = on_attach,
+	},
+	flags = {
+		debounce_text_changes = 150,
+	},
+})
+
+local servers = { "bashls", "pyright", "clangd", "html", "cssls", "yamlls" }
+
+lspconfig.rust_analyzer.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 150,
+	},
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				allFeatures = true,
+			},
+			completion = {
+				postfix = {
+					enable = false,
+				},
+			},
+		},
+	},
+})
 
 -- Call setup
 for _, lsp in ipairs(servers) do

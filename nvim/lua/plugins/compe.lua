@@ -18,7 +18,7 @@ cmp.setup {
   enabled = true,
   debug = false,
   min_length = 0,
-  preselect = "disable",
+  preselect = cmp.PreselectMode.None,
   throttle_time = 80,
   source_timeout = 200,
   incomplete_delay = 400,
@@ -37,10 +37,10 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<Tab>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
+      -- behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
   --
@@ -65,7 +65,7 @@ cmp.setup {
   --   end
    },
   experimental = {
-    ghost_text = false,
+    ghost_text = true,
   },
   -- Load sources, see: https://github.com/topics/nvim-cmp
   sources = {
@@ -73,9 +73,9 @@ cmp.setup {
 	  { name = "nvim_lsp_signature_help" },
 	  { name = 'nvim_lsp' },
 	  { name = "treesitter" },
-	  { name = "buffer" },
+	  -- { name = "buffer" },
 	  { name = 'path' },
-	  { name = "nvim_lua" },
+	  -- { name = "nvim_lua" },
 	  { name = "luasnip" },
 
   },
@@ -87,6 +87,13 @@ cmp.setup.cmdline(':', {
 		{	name = 'path'}
   })
 })
+
+-- cmp.setup.cmdline({ '/', '?' }, {
+-- 	mapping = cmp.mapping.preset.cmdline(),
+-- 	sources = {
+-- 		{ name = 'buffer' }
+-- 	}
+-- })
 
 -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })

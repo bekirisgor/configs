@@ -20,19 +20,19 @@ require("toggleterm").setup({
 	shade_filetypes = {},
 	autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
 	highlights = {
-    -- highlights which map to a highlight group name and a table of it's values
-    -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
-    Normal = {
-      guibg = "none",
-    },
-    NormalFloat = {
-			guibg = "none"
-    },
-    --[[ FloatBorder = {
+		-- highlights which map to a highlight group name and a table of it's values
+		-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+		Normal = {
+			guibg = "none",
+		},
+		NormalFloat = {
+			guibg = "none",
+		},
+		--[[ FloatBorder = {
       guifg = "<VALUE-HERE>",
       guibg = "<VALUE-HERE>",
     }, ]]
-  },
+	},
 	shade_terminals = false, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
 	-- shading_factor = '<number>', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
 	start_in_insert = true,
@@ -42,7 +42,7 @@ require("toggleterm").setup({
 	persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
 	direction = "float",
 	close_on_exit = true, -- close the terminal window when the process exits
-	shell = vim.o.shell, -- change the default shell
+	shell = "fish",
 	auto_scroll = true, -- automatically scroll to the bottom on terminal output
 	-- This field is only relevant if direction is set to 'float'
 	float_opts = {
@@ -50,7 +50,7 @@ require("toggleterm").setup({
 		-- see :h nvim_open_win for details on borders however
 		-- the 'curved' border is a custom border type
 		-- not natively supported but implemented in this plugin.
-		border = "double",
+		border = "single",
 		-- like `size`, width and height can be a number or function which is passed the current terminal
 		-- width = <value>,
 		-- height = <value>,
@@ -76,8 +76,8 @@ local float_term = Terminal:new({
 })
 
 local vertical_term = Terminal:new({
-	cmd='fish',
-	dirt= "git-dir",
+	cmd = "fish",
+	dir = "git-dir",
 	height = 300,
 })
 
@@ -89,7 +89,5 @@ function toggle_vertical_term()
 	vertical_term:toggle()
 end
 
-map("n", "<c-t>", '<Cmd>exe v:count1 . "ToggleTerm"<CR>', { silent = true })
-map("n", "<c-f>", '<Cmd>lua toggle_float()<CR>', { silent = true })
-map("n", "<c-s>", '<Cmd>lua toggle_vertical_term()<CR>', { silent = true })
-
+map("n", "<c-t>", "<Cmd>lua toggle_float()<CR>", { silent = true })
+map("n", "<c-s>", "<Cmd>lua toggle_vertical_term()<CR>", { silent = true })

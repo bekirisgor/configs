@@ -57,6 +57,7 @@ end
 null_ls.setup({
 	debug = false,
 	sources = {
+		require("typescript.extensions.null-ls.code-actions"),
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.autopep8.with({
 			filetypes = { "python" },

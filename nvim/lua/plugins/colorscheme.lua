@@ -37,47 +37,47 @@ require("tokyonight").setup({
 
 -- vim.api.nvim_command('colorscheme catppuccin')
 
--- vim.g.catppuccin_flavour = "mocha"
--- catppuccin.setup({
--- 	transparent_background = true,
--- 	term_colors = true,
--- 	--[[ dim_inactive = {
--- 		enabled = true,
--- 		shade = "dark",
--- 		percentage = 0.15,
--- 	}, ]]
--- 	compile = {
--- 		enabled = true,
--- 		path = vim.fn.stdpath("cache") .. "/catppuccin",
--- 	},
--- 	integrations = {
--- 		gitsigns = true,
--- 		hop = false,
--- 		cmp = true,
--- 		nvimtree = { enabled = true, show_root = true, transparent_panel = true },
--- 		telescope = true,
--- 		native_lsp = {
--- 			enabled = true,
--- 		},
--- 	},
---
--- 	custom_highlights = {
--- 		DiagnosticVirtualTextError = { bg = "NONE" },
--- 		DiagnosticVirtualTextWarn = { bg = "NONE" },
--- 		DiagnosticVirtualTextInfo = { bg = "NONE" },
--- 		DiagnosticVirtualTextHint = { bg = "NONE" },
--- 		-- TSVariable = { fg = "#dcf5e5" },
--- 	},
--- 	color_overrides = {
--- 		mocha = {
--- 			-- yellow = "#F9E2AF",
--- 			-- green = "#A6E3A1",
--- 			-- teal = "#e1eaf5",
--- 			-- sky = "#89DCEB",
--- 			-- sapphire = "#f78f6d",
--- 		},
--- 	},
--- })
+vim.g.catppuccin_flavour = "mocha"
+catppuccin.setup({
+	transparent_background = true,
+	term_colors = true,
+	--[[ dim_inactive = {
+		enabled = true,
+		shade = "dark",
+		percentage = 0.15,
+	}, ]]
+	compile = {
+		enabled = true,
+		path = vim.fn.stdpath("cache") .. "/catppuccin",
+	},
+	integrations = {
+		gitsigns = true,
+		hop = false,
+		cmp = true,
+		nvimtree = { enabled = true, show_root = true, transparent_panel = true },
+		telescope = true,
+		native_lsp = {
+			enabled = true,
+		},
+	},
+
+	custom_highlights = {
+		DiagnosticVirtualTextError = { bg = "NONE" },
+		DiagnosticVirtualTextWarn = { bg = "NONE" },
+		DiagnosticVirtualTextInfo = { bg = "NONE" },
+		DiagnosticVirtualTextHint = { bg = "NONE" },
+		-- TSVariable = { fg = "#dcf5e5" },
+	},
+	color_overrides = {
+		mocha = {
+			-- yellow = "#F9E2AF",
+			-- green = "#A6E3A1",
+			-- teal = "#e1eaf5",
+			-- sky = "#89DCEB",
+			-- sapphire = "#f78f6d",
+		},
+	},
+})
 
 require("rose-pine").setup({
   --- @usage 'main' | 'moon'

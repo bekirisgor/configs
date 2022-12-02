@@ -94,11 +94,6 @@ _G.packer_plugins = {
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/catppuccin",
     url = "https://github.com/catppuccin/nvim"
   },
-  ["cmp-buffer"] = {
-    loaded = true,
-    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/cmp-buffer",
-    url = "https://github.com/hrsh7th/cmp-buffer"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
@@ -119,20 +114,10 @@ _G.packer_plugins = {
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["git-worktree.nvim"] = {
-    loaded = true,
-    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
-    url = "https://github.com/ThePrimeagen/git-worktree.nvim"
-  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
-  },
-  harpoon = {
-    loaded = true,
-    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/harpoon",
-    url = "https://github.com/ThePrimeagen/harpoon"
   },
   hop = {
     loaded = true,
@@ -163,16 +148,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
     url = "https://github.com/ray-x/lsp_signature.nvim"
-  },
-  ["lspkind-nvim"] = {
-    loaded = true,
-    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
-    url = "https://github.com/onsails/lspkind-nvim"
-  },
-  ["lspsaga.nvim"] = {
-    loaded = true,
-    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
-    url = "https://github.com/glepnir/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -209,11 +184,6 @@ _G.packer_plugins = {
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
-  ["nvim-lsp-ts-utils"] = {
-    loaded = true,
-    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/nvim-lsp-ts-utils",
-    url = "https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -239,11 +209,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
-  },
-  ["nvim-treesitter-context"] = {
-    loaded = true,
-    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
-    url = "https://github.com/romgrk/nvim-treesitter-context"
   },
   ["nvim-ts-context-commentstring"] = {
     loaded = true,
@@ -275,6 +240,11 @@ _G.packer_plugins = {
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/rose-pine",
     url = "https://github.com/rose-pine/neovim"
   },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
+    url = "https://github.com/simrat39/rust-tools.nvim"
+  },
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
@@ -304,6 +274,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
+  },
+  ["typescript.nvim"] = {
+    loaded = true,
+    path = "/Users/bekirisgor/.local/share/nvim/site/pack/packer/start/typescript.nvim",
+    url = "https://github.com/jose-elias-alvarez/typescript.nvim"
   },
   ["vim-fugitive"] = {
     loaded = true,

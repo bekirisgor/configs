@@ -18,9 +18,9 @@ saga.init_lsp_saga({
 		},
 	},
 	code_action_lightbulb = {
-		enable = true,
+		enable = false,
 		enable_in_insert = false,
-		cache_code_action = true,
+		cache_code_action = false,
 		sign = true,
 		update_time = 150,
 		sign_priority = 20,
@@ -50,22 +50,22 @@ keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
 keymap("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
 
 -- Show cursor diagnostic
-keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
+keymap("n", "<leader>cs", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
 
 -- Diagnsotic jump can use `<c-o>` to jump back
-keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
-keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
+keymap("n", "[w", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
+keymap("n", "]w", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
 
 -- Only jump to error
-keymap("n", "[E", function()
+keymap("n", "[e", function()
 	require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end, { silent = true })
-keymap("n", "]E", function()
+keymap("n", "]e", function()
 	require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
 end, { silent = true })
 
 -- Outline
-keymap("n", "<leader>h", "<cmd>LSoutlineToggle<CR>", { silent = true })
+keymap("n", "<leader>s", "<cmd>LSoutlineToggle<CR>", { silent = true })
 
 -- Hover Doc
 keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
