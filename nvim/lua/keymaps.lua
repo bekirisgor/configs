@@ -40,6 +40,8 @@ map({ "n", "v" }, "N", "Nzz", { noremap = true, silent = true })
 map({ "n", "v" }, "#", "#zz", { noremap = true, silent = true })
 map({ "n", "v" }, "*", "*zz", { noremap = true, silent = true })
 map({ "n", "v" }, "g*", "g*zz", { noremap = true, silent = true })
+map({ "n", "v" }, "<C-d>", "<C-d>zz", { noremap = true, silent = true })
+map({ "n", "v" }, "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 
 map("n", "<leader>p", '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map("n", "<leader>gg", '<cmd>lua require("telescope.builtin").live_grep()<cr>')
