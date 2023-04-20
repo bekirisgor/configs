@@ -9,4 +9,4 @@ api.nvim_create_autocmd("TextYankPost", {
 })
 
 
-vim.cmd("autocmd Colorscheme * highlight NvimTreeNormal guibg=none guifg=#9da5b3")
+-- vim.cmd("autocmd Colorscheme * highlight NvimTreeNormal guibg=none guifg=#9da5b3")

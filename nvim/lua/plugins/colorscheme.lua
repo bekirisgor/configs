@@ -1,39 +1,5 @@
 vim.o.termiguicolors = true
 local catppuccin = require("catppuccin")
-require("tokyonight").setup({
-	-- your configuration comes here
-	-- or leave it empty to use the default settings
-	style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
-	transparent = true, -- Enable this to disable setting the background color
-	terminal_colors = false, -- Configure the colors used when opening a `:terminal` in Neovim
-	styles = {
-		-- Style to be applied to different syntax groups
-		-- Value is any valid attr-list value `:help attr-list`
-		-- comments = "italic",
-		-- keywords = "italic",
-		-- functions = "NONE",
-		-- variables = "NONE",
-		-- -- Background styles. Can be "dark", "transparent" or "normal"
-		-- sidebars = "dark", -- style for sidebars, see below
-		-- floats = "dark", -- style for floating windows
-	},
-	-- sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-	day_brightness = 0.2, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-	-- hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-	-- dim_inactive = false, -- dims inactive windows
-	-- lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-
-	--- You can override specific color groups to use other groups or a hex color
-	--- fucntion will be called with a ColorScheme table
-	-- -@param colors ColorScheme
-	-- on_colors = function(colors) end,
-
-	--- You can override specific highlights to use other groups or a hex color
-	--- fucntion will be called with a Highlights and ColorScheme table
-	-- -@param highlights Highlights
-	-- -@param colors ColorScheme
-	-- on_highlights = function(highlights, colors) end,
-})
 
 -- vim.api.nvim_command('colorscheme catppuccin')
 
@@ -46,6 +12,7 @@ catppuccin.setup({
 		shade = "dark",
 		percentage = 0.15,
 	}, ]]
+
 	compile = {
 		enabled = true,
 		path = vim.fn.stdpath("cache") .. "/catppuccin",
@@ -57,10 +24,17 @@ catppuccin.setup({
 		bufferline = true,
 		nvimtree = { enabled = true, show_root = true, transparent_panel = true },
 		telescope = true,
+		vimwiki = true,
 		native_lsp = {
 			enabled = true,
 		},
 	},
+
+	-- highlight_overrides = {
+	-- 	all = function(colors)
+	-- 		return {CmpBorder = {fg }}
+	-- 	end,
+	-- },
 
 	custom_highlights = function(colors)
 		return {
@@ -75,8 +49,8 @@ catppuccin.setup({
 	end,
 	color_overrides = {
 		mocha = {
-			base = "#14181D",
-			mantle = "#14181D",
+			-- base = "#0d1117",
+			-- mantle = "#06080d",
 			-- ="#14181D",
 			-- yellow = "#F9E2AF",
 			-- green = "#A6E3A1",
@@ -98,8 +72,8 @@ require("rose-pine").setup({
 
 	--- @usage string hex value or named color from rosepinetheme.com/palette
 	groups = {
-		background = "base",
-		panel = "surface",
+		background = "#101017",
+		panel = "#101017",
 		border = "highlight_med",
 		comment = "#333831",
 		link = "iris",
@@ -128,6 +102,31 @@ require("rose-pine").setup({
 	},
 })
 
+require("kanagawa").setup({
+	undercurl = true, -- enable undercurls
+	commentStyle = { italic = true },
+	functionStyle = {},
+	keywordStyle = { italic = true },
+	statementStyle = { bold = true },
+	typeStyle = {},
+	variablebuiltinStyle = { italic = true },
+	specialReturn = true, -- special highlight for the return keyword
+	specialException = true, -- special highlight for exception handling keywords
+	transparent = false, -- do not set background color
+	dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+	globalStatus = false, -- adjust window separators highlight for laststatus=3
+	terminalColors = true, -- define vim.g.terminal_color_{0,17}
+	-- colors = {
+	-- 	bg = "#0d1117",
+	-- },
+	-- overrides = {},
+	theme = "default", -- Load "default" theme or the experimental "light" theme
+})
+
+require("github-theme").setup({
+	-- other config
+})
+
 -- vim.cmd ('colorscheme oh-lucy-evening')
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme rose-pine")
 -- vim.cmd("colorscheme catppuccin")

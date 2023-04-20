@@ -12,12 +12,6 @@ map("n", "<leader>o", ':e <C-R>=expand("%:p:h") . "/" <CR>')
 map("", "<leader>c", ":w !pbcopy -ib<cr><cr>")
 map("", "<leader>u", ":read !pbpaste --clipboard --output<cr>")
 
--- Better navigation
-map("n", "<C-J>", "<C-W>j")
-map("n", "<C-K>", "<C-W>k")
-map("n", "<C-H>", "<C-W>h")
-map("n", "<C-L>", "<C-W>l")
-
 -- Disable arrow keys
 map({ "i", "n", "v" }, "<up>", "<nop>")
 map({ "i", "n", "v" }, "<down>", "<nop>")
@@ -47,6 +41,14 @@ map("n", "<leader>p", '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map("n", "<leader>gg", '<cmd>lua require("telescope.builtin").live_grep()<cr>')
 map("n", "<leader>gb", '<cmd>lua require("telescope.builtin").buffers()<cr>')
 map("n", "<leader>gh", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
+map("n", "<leader>gr", '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
+
+-- copilot accept
+map("i", "<C-T>", "copilot#Accept('<CR>')", { replace_keycodes = false, noremap = true, expr = true, silent = true })
+map({ "n", "i" }, "<C-J>", "<Plug>(copilot-suggest)")
+-- map({ "n", "i" }, "<C-J>", "<Plug>(copilot-previous)")
+map({ "n", "i" }, "<C-L>", "<Plug>(copilot-next)")
+-- vim.cmd([[ let g:copilot_no_tab_map= v:true]])
 
 -- Terminal commands
 -- ueoa is first through fourth finger left hand home row.

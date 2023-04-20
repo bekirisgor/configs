@@ -57,20 +57,24 @@ end
 null_ls.setup({
 	debug = false,
 	sources = {
-		require("typescript.extensions.null-ls.code-actions"),
+		-- require("typescript.extensions.null-ls.code-actions"),
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.autopep8.with({
 			filetypes = { "python" },
 			extra_args = { "--indent-size=2" },
 		}),
-		null_ls.builtins.diagnostics.eslint_d.with({
+		null_ls.builtins.diagnostics.eslint.with({
 			-- extra_args = { "--stdin-filename", ".eslintrc.js" },
 		}),
-		null_ls.builtins.code_actions.eslint_d.with({
+		null_ls.builtins.code_actions.eslint.with({
 			-- extra_args = { "--stdin-filename", ".eslintrc.js" },
 		}),
-		-- null_ls.builtins.formatting.prettier_d_slim,
 		null_ls.builtins.formatting.prettier_d_slim,
+		null_ls.builtins.formatting.yamlfmt,
+		null_ls.builtins.diagnostics.yamllint,
+		-- null_ls.builtins.formatting.prettierd,
+		-- null_ls.builtins.formatting.prettier,
+		null_ls.builtins.diagnostics.hadolint,
 		-- on_attach = on_attach,
 	},
 	-- on_attach = function(client)

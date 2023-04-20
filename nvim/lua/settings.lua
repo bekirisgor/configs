@@ -15,16 +15,17 @@ vim.opt.relativenumber = true
 
 vim.o.lazyredraw = true
 vim.o.synmaxcol = 500
-vim.o.laststatus = 2
+vim.o.laststatus = 10
 vim.o.colorcolumn = 80
 vim.o.linebreak = true
 vim.o.timeoutlen = 800
 
 vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.o.undofile = true
-vim.o.undolevel = 5
+vim.o.undolevel = 1
 
 vim.o.autoindent = true
+vim.o.preserveindent = true
 vim.o.scrolloff = 2
 
 vim.o.ruler = false
@@ -55,9 +56,9 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 vim.o.expandtab = false
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.softtabstop = 2
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
 vim.o.smartindent = true
 vim.o.smarttab = true
 
@@ -66,7 +67,7 @@ vim.o.wildmenu = true
 vim.o.wildmode = "list:longest"
 
 vim.o.wildignore =
-".hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor"
+	".hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor"
 
 vim.o.listchars = "nbsp:¬,extends:»,precedes:«,trail:•"
 
@@ -74,7 +75,8 @@ vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
 vim.opt.diffopt:append("context:3")
 vim.opt.diffopt:append("vertical")
-vim.opt.diffopt:append("foldcolumn:1")
+vim.opt.diffopt:append("internal")
+vim.opt.diffopt:append("foldcolumn:0")
 vim.opt.diffopt:append("hiddenoff")
 vim.opt.diffopt:append("indent-heuristic")
 vim.opt.diffopt:append("algorithm:patience")
@@ -82,33 +84,33 @@ vim.opt.diffopt:append("algorithm:patience")
 -- vim.opt.shortmess:append "sI"
 
 -- -- Disable builtin plugins
---[[ local disabled_built_ins = {
-   "2html_plugin",
-   "getscript",
-   "getscriptPlugin",
-   "gzip",
-   "logipat",
-   "netrw",
-   "netrwPlugin",
-   "netrwSettings",
-   "netrwFileHandlers",
-   "matchit",
-   "tar",
-   "tarPlugin",
-   "rrhelper",
-   "spellfile_plugin",
-   "vimball",
-   "vimballPlugin",
-   "zip",
-   "zipPlugin",
-   "tutor",
-   "rplugin",
-   "synmenu",
-   "optwin",
-   "compiler",
-   "bugreport",
+local disabled_built_ins = {
+	"2html_plugin",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"matchit",
+	"tar",
+	"tarPlugin",
+	"rrhelper",
+	"spellfile_plugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
+	"tutor",
+	"rplugin",
+	"synmenu",
+	"optwin",
+	"compiler",
+	"bugreport",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-   vim.g["loaded_" .. plugin] = 1
-end ]]
+	vim.g["loaded_" .. plugin] = 1
+end

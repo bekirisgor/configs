@@ -1,12 +1,15 @@
 export PATH="$HOME/.cargo/bin:$PATH"
 
-abbr -a c cargo
 abbr -a e nvim
 abbr -a gc 'git checkout'
 abbr -a ga 'git add -p'
 abbr -a vimdiff 'nvim -d'
 abbr -a ct 'cargo t'
 
+abbr -a d docker
+abbr -a dc "docker compose"
+abbr -a dcf "docker compose -f docker-compose.yml"
+abbr -a nvm /usr/local/bin/nvim-night/bin/nvm
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -42,10 +45,3 @@ setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underl
 setenv FZF_DEFAULT_COMMAND 'fd --type file --follow'
 setenv FZF_CTRL_T_COMMAND 'fd --type file --follow'
 setenv FZF_DEFAULT_OPTS '--height 20%'
-
-
-
-# bun
-set -Ux BUN_INSTALL "/Users/bekirisgor/.bun"
-fish_add_path "/Users/bekirisgor/.bun/bin"
-

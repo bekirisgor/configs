@@ -5,3 +5,4 @@ fish/fishd.tmp*
 nvim/plugged
 **/.DS_Store
 configstore
+node_modules/**

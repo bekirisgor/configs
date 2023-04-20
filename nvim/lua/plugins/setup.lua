@@ -19,14 +19,16 @@ return require("packer").startup(function(use)
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "kyazdani42/nvim-web-devicons" })
+	-- use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
+	use("~/Desktop/DEV/testproject/bufferline.nvim")
 	use("mhinz/vim-startify")
 	use("xiyaowong/nvim-transparent")
 
 	-- ColorSchemes
-	use("folke/tokyonight.nvim")
 	use("savq/melange")
+	use("navarasu/onedark.nvim")
 	use("rebelot/kanagawa.nvim")
+	use({ "projekt0n/github-nvim-theme" })
 	use({ "catppuccin/nvim", as = "catppuccin", run = ":CatppuccinCompile" })
 	use({ "rose-pine/neovim", as = "rose-pine" })
 	-- Typing features
@@ -41,16 +43,15 @@ return require("packer").startup(function(use)
 	}) ]]
 	use("tpope/vim-surround")
 	use("tpope/vim-rhubarb")
-	use("windwp/nvim-autopairs")
+	-- use("windwp/nvim-autopairs")
 
 	--Git
 	use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
 	use("tpope/vim-fugitive")
-	use("TimUntersberger/neogit")
 
 	-- IDE Enhancement
 	use("kyazdani42/nvim-web-devicons")
-	use("kyazdani42/nvim-tree.lua")
+	use({ "kyazdani42/nvim-tree.lua", commit = "9c97e6449b0b0269bd44e1fd4857184dfa57bb4c" })
 	use({ "akinsho/toggleterm.nvim" })
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -72,11 +73,11 @@ return require("packer").startup(function(use)
 	use({ "phaazon/hop.nvim", as = "hop" })
 	use("lewis6991/impatient.nvim")
 	use({ "vimwiki/vimwiki" })
-	use("lukas-reineke/indent-blankline.nvim")
+	-- use("lukas-reineke/indent-blankline.nvim")
 
 	-- Languages
 	-- use("leafgarland/typescript-vim")
-	use("jose-elias-alvarez/typescript.nvim")
+	-- use("jose-elias-alvarez/typescript.nvim")
 	use("MaxMEllon/vim-jsx-pretty")
 	use("jparise/vim-graphql")
 	use("fatih/vim-go")
@@ -86,25 +87,27 @@ return require("packer").startup(function(use)
 
 	-- Languages enhancemenet
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	-- use("romgrk/nvim-treesitter-context")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("numToStr/Comment.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
+	use("github/copilot.vim")
+	-- use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
 
 	-- LSP Things
 	use("neovim/nvim-lspconfig")
-	-- use("onsails/lspkind-nvim")
+	use("onsails/lspkind-nvim")
 	-- use("glepnir/lspsaga.nvim")
-	use({ "simrat39/symbols-outline.nvim" }, require("symbols-outline").setup())
+	--use({ "simrat39/symbols-outline.nvim" }, require("symbols-outline").setup())
 	use("nvim-lua/lsp-status.nvim")
 	use("ray-x/lsp_signature.nvim")
+	use("pantharshit00/vim-prisma")
 
 	--Completitions
 	use("hrsh7th/cmp-nvim-lsp")
-	-- use("hrsh7th/cmp-buffer")
+	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-path")
 	use("L3MON4D3/LuaSnip")
-	use("saadparwaiz1/cmp_luasnip")
+	-- use("saadparwaiz1/cmp_luasnip")
 end)
